@@ -50,7 +50,7 @@ namespace Appli_gestion_cla.Controllers
         public IActionResult Create()
         {
             ViewData["AffectationId"] = new SelectList(_context.Affectations, "Id", "Id");
-            ViewData["EtudiantId"] = new SelectList(_context.Etudiants, "Id", "Id");
+            ViewData["EtudiantId"] = new SelectList(_context.Etudiants, "Id", "Nom");
             return View();
         }
 
@@ -68,7 +68,7 @@ namespace Appli_gestion_cla.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AffectationId"] = new SelectList(_context.Affectations, "Id", "Id", note.AffectationId);
-            ViewData["EtudiantId"] = new SelectList(_context.Etudiants, "Id", "Id", note.EtudiantId);
+            ViewData["EtudiantId"] = new SelectList(_context.Etudiants, "Id", "Nom", note.EtudiantId);
             return View(note);
         }
 
@@ -86,7 +86,7 @@ namespace Appli_gestion_cla.Controllers
                 return NotFound();
             }
             ViewData["AffectationId"] = new SelectList(_context.Affectations, "Id", "Id", note.AffectationId);
-            ViewData["EtudiantId"] = new SelectList(_context.Etudiants, "Id", "Id", note.EtudiantId);
+            ViewData["EtudiantId"] = new SelectList(_context.Etudiants, "Id", "Nom", note.EtudiantId);
             return View(note);
         }
 
@@ -123,7 +123,7 @@ namespace Appli_gestion_cla.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AffectationId"] = new SelectList(_context.Affectations, "Id", "Id", note.AffectationId);
-            ViewData["EtudiantId"] = new SelectList(_context.Etudiants, "Id", "Id", note.EtudiantId);
+            ViewData["EtudiantId"] = new SelectList(_context.Etudiants, "Id", "Nom", note.EtudiantId);
             return View(note);
         }
 

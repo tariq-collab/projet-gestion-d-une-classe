@@ -1,10 +1,10 @@
-﻿@model Appli_gestion_cla.Models.Etudiants
+﻿@model Appli_gestion_cla.Models.Etudiant
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Créer";
 }
 
-<h1>Create</h1>
+<h1>Créer_Etudiant</h1>
 
 <h4>Etudiants</h4>
 <hr />
@@ -22,29 +22,29 @@
                 <input asp-for="Prenom" class="form-control" />
                 <span asp-validation-for="Prenom" class="text-danger"></span>
             </div>
+            
             <div class="form-group">
-                <label asp-for="classe" class="control-label"></label>
-                <input asp-for="classe" class="form-control" />
-                <span asp-validation-for="classe" class="text-danger"></span>
+                <label asp-for="Age" class="control-label"></label>
+                <input asp-for="Age" class="form-control" />
+                <span asp-validation-for="Age" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="age" class="control-label"></label>
-                <input asp-for="age" class="form-control" />
-                <span asp-validation-for="age" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+
                 <label asp-for="ClasseId" class="control-label"></label>
-                <select asp-for="ClasseId" class ="form-control" asp-items="ViewBag.ClasseId"></select>
+                <select asp-for="ClasseId" class ="form-control" asp-items="ViewBag.ClasseId"><option value="">--Selectionner une classe--</option></select>
+                <span asp-validation-for="ClasseId" class="text-danger"></span>
             </div>
+            <br/>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <button type="submit" value="Create" class="btn btn-primary">Crée</button>
             </div>
+            
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Retour à la liste </a>
 </div>
 
 @section Scripts {

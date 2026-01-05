@@ -1,4 +1,4 @@
-﻿@model Appli_gestion_cla.Models.Etudiants
+﻿@model Appli_gestion_cla.Models.Etudiant
 
 @{
     ViewData["Title"] = "Details";
@@ -23,22 +23,16 @@
             @Html.DisplayFor(model => model.Prenom)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.classe)
+            @Html.DisplayNameFor(model => model.Age)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.classe)
+            @Html.DisplayFor(model => model.Age)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.age)
+            @Html.DisplayNameFor(model => model.ClasseId)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.age)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Classe)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Classe.Id)
+            @Html.DisplayFor(model => model.ClasseId)
         </dd>
     </dl>
 </div>

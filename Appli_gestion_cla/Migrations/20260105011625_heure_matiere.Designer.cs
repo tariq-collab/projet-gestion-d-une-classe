@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Appli_gestion_cla.Data.Migrations
+namespace Appli_gestion_cla.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251228231744_addEnseignant")]
-    partial class addEnseignant
+    [Migration("20260105011625_heure_matiere")]
+    partial class heure_matiere
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,48 @@ namespace Appli_gestion_cla.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Appli_gestion_cla.Models.Admin", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Admin");
+                });
+
+            modelBuilder.Entity("Appli_gestion_cla.Models.Affectation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ClasseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EnseignantId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MatiereId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClasseId");
+
+                    b.HasIndex("MatiereId");
+
+                    b.HasIndex("EnseignantId", "MatiereId", "ClasseId")
+                        .IsUnique();
+
+                    b.ToTable("Affectations");
+                });
 
             modelBuilder.Entity("Appli_gestion_cla.Models.Classe", b =>
                 {
@@ -37,12 +79,11 @@ namespace Appli_gestion_cla.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Nom_sale")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Classe");
+                    b.ToTable("Classes");
                 });
 
             modelBuilder.Entity("Appli_gestion_cla.Models.Enseignant", b =>
@@ -53,30 +94,35 @@ namespace Appli_gestion_cla.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Matiere")
-                        .IsRequired()
+                    b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("MatiereId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nom")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Prenom")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("MatiereId");
+
                     b.ToTable("Enseignants");
                 });
 
-            modelBuilder.Entity("Appli_gestion_cla.Models.Etudiants", b =>
+            modelBuilder.Entity("Appli_gestion_cla.Models.Etudiant", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
 
                     b.Property<int>("ClasseId")
                         .HasColumnType("int");
@@ -86,13 +132,6 @@ namespace Appli_gestion_cla.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Prenom")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("age")
-                        .HasColumnType("int");
-
-                    b.Property<string>("classe")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -103,19 +142,103 @@ namespace Appli_gestion_cla.Data.Migrations
                     b.ToTable("Etudiants");
                 });
 
+            modelBuilder.Entity("Appli_gestion_cla.Models.Matiere", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("EnseignantId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Nbr_heure")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nom")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EnseignantId");
+
+                    b.ToTable("Matieres");
+                });
+
+            modelBuilder.Entity("Appli_gestion_cla.Models.Note", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AffectationId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateEvaluation")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EtudiantId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TypeEvaluation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Valeur")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AffectationId");
+
+                    b.HasIndex("EtudiantId");
+
+                    b.ToTable("Notes");
+                });
+
+            modelBuilder.Entity("Appli_gestion_cla.Models.Prof", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Prof");
+                });
+
             modelBuilder.Entity("ClasseEnseignant", b =>
                 {
-                    b.Property<int>("ClasseId")
+                    b.Property<int>("ClassesId")
                         .HasColumnType("int");
 
                     b.Property<int>("EnseignantsId")
                         .HasColumnType("int");
 
-                    b.HasKey("ClasseId", "EnseignantsId");
+                    b.HasKey("ClassesId", "EnseignantsId");
 
                     b.HasIndex("EnseignantsId");
 
                     b.ToTable("ClasseEnseignant");
+                });
+
+            modelBuilder.Entity("ClasseMatiere", b =>
+                {
+                    b.Property<int>("ClassesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MatieresId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ClassesId", "MatieresId");
+
+                    b.HasIndex("MatieresId");
+
+                    b.ToTable("ClasseMatiere");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -320,7 +443,44 @@ namespace Appli_gestion_cla.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Appli_gestion_cla.Models.Etudiants", b =>
+            modelBuilder.Entity("Appli_gestion_cla.Models.Affectation", b =>
+                {
+                    b.HasOne("Appli_gestion_cla.Models.Classe", "Classe")
+                        .WithMany("Affectations")
+                        .HasForeignKey("ClasseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Appli_gestion_cla.Models.Enseignant", "Enseignant")
+                        .WithMany("Affectations")
+                        .HasForeignKey("EnseignantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Appli_gestion_cla.Models.Matiere", "Matiere")
+                        .WithMany("Affectations")
+                        .HasForeignKey("MatiereId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Classe");
+
+                    b.Navigation("Enseignant");
+
+                    b.Navigation("Matiere");
+                });
+
+            modelBuilder.Entity("Appli_gestion_cla.Models.Enseignant", b =>
+                {
+                    b.HasOne("Appli_gestion_cla.Models.Matiere", "Matiere")
+                        .WithMany("Enseignants")
+                        .HasForeignKey("MatiereId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Matiere");
+                });
+
+            modelBuilder.Entity("Appli_gestion_cla.Models.Etudiant", b =>
                 {
                     b.HasOne("Appli_gestion_cla.Models.Classe", "Classe")
                         .WithMany("Etudiants")
@@ -331,17 +491,58 @@ namespace Appli_gestion_cla.Data.Migrations
                     b.Navigation("Classe");
                 });
 
+            modelBuilder.Entity("Appli_gestion_cla.Models.Matiere", b =>
+                {
+                    b.HasOne("Appli_gestion_cla.Models.Enseignant", null)
+                        .WithMany("Matieres")
+                        .HasForeignKey("EnseignantId");
+                });
+
+            modelBuilder.Entity("Appli_gestion_cla.Models.Note", b =>
+                {
+                    b.HasOne("Appli_gestion_cla.Models.Affectation", "Affectation")
+                        .WithMany("Notes")
+                        .HasForeignKey("AffectationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Appli_gestion_cla.Models.Etudiant", "Etudiant")
+                        .WithMany("Notes")
+                        .HasForeignKey("EtudiantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Affectation");
+
+                    b.Navigation("Etudiant");
+                });
+
             modelBuilder.Entity("ClasseEnseignant", b =>
                 {
                     b.HasOne("Appli_gestion_cla.Models.Classe", null)
                         .WithMany()
-                        .HasForeignKey("ClasseId")
+                        .HasForeignKey("ClassesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Appli_gestion_cla.Models.Enseignant", null)
                         .WithMany()
                         .HasForeignKey("EnseignantsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ClasseMatiere", b =>
+                {
+                    b.HasOne("Appli_gestion_cla.Models.Classe", null)
+                        .WithMany()
+                        .HasForeignKey("ClassesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Appli_gestion_cla.Models.Matiere", null)
+                        .WithMany()
+                        .HasForeignKey("MatieresId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -397,9 +598,35 @@ namespace Appli_gestion_cla.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Appli_gestion_cla.Models.Affectation", b =>
+                {
+                    b.Navigation("Notes");
+                });
+
             modelBuilder.Entity("Appli_gestion_cla.Models.Classe", b =>
                 {
+                    b.Navigation("Affectations");
+
                     b.Navigation("Etudiants");
+                });
+
+            modelBuilder.Entity("Appli_gestion_cla.Models.Enseignant", b =>
+                {
+                    b.Navigation("Affectations");
+
+                    b.Navigation("Matieres");
+                });
+
+            modelBuilder.Entity("Appli_gestion_cla.Models.Etudiant", b =>
+                {
+                    b.Navigation("Notes");
+                });
+
+            modelBuilder.Entity("Appli_gestion_cla.Models.Matiere", b =>
+                {
+                    b.Navigation("Affectations");
+
+                    b.Navigation("Enseignants");
                 });
 #pragma warning restore 612, 618
         }

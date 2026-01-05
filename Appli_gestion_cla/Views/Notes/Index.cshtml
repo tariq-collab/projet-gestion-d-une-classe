@@ -1,17 +1,17 @@
 ﻿@model IEnumerable<Appli_gestion_cla.Models.Note>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Notes";
 }
 
-<h1>Index</h1>
+<h1 class="size2">Notes_Etudiants</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="size" asp-action="Create">Ajout_Note</a>
 </p>
 <table class="table">
     <thead>
-        <tr>
+        <tr class="size">
             <th>
                 @Html.DisplayNameFor(model => model.Valeur)
             </th>
@@ -32,7 +32,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+        <tr class="size">
             <td>
                 @Html.DisplayFor(modelItem => item.Valeur)
             </td>
@@ -43,15 +43,15 @@
                 @Html.DisplayFor(modelItem => item.TypeEvaluation)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Etudiant.Id)
+                @Html.DisplayFor(modelItem => item.Etudiant.Nom)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Affectation.Id)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a class="edit" asp-action="Edit" asp-route-id="@item.Id">Modifier</a> |
+                <a class="detail" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a class="delete" asp-action="Delete" asp-route-id="@item.Id">Supprimer</a>
             </td>
         </tr>
 }

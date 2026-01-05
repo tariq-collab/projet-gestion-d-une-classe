@@ -1,15 +1,15 @@
 ﻿@model Appli_gestion_cla.Models.Enseignant
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Créer";
 }
 
-<h1>Create</h1>
+<h1>Créer_Enseignant</h1>
 
 <h4>Enseignant</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -23,19 +23,29 @@
                 <span asp-validation-for="Prenom" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Matiere" class="control-label"></label>
-                <input asp-for="Matiere" class="form-control" />
-                <span asp-validation-for="Matiere" class="text-danger"></span>
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
+
+            <!--<div class="form-group">
+               <label asp-for="MatiereId" class="control-label">Matière</label>
+               <select asp-for="MatiereId" class="form-control" asp-items="ViewBag.MatiereId">
+                <option value="">-- Sélectionnez une matière --</option>
+               </select>
+                <span asp-validation-for="MatiereId" class="text-danger"></span>
+            </div>-->
+            <br/>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <button type="submit" value="Create" class="btn btn-primary">Créer</button>
             </div>
+            <br/>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Retour à la liste</a>
 </div>
 
 @section Scripts {

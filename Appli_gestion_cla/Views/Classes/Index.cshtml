@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Appli_gestion_cla.Models.Classe>
+
+@{
+    ViewData["Title"] = "Liste classe";
+}
+
+<h1 class="size2">Liste_Classe</h1>
+
+<p>
+    <a class="size" asp-action="Create">Nouvelle Classe</a>
+</p>
+<table class="table">
+    <thead>
+        <tr class="size">
+            <th>
+                @Html.DisplayNameFor(model => model.Nom_sale)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Capacite_Max)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr class="size">
+            <td>
+                @Html.DisplayFor(modelItem => item.Nom_sale)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Capacite_Max)
+            </td>
+            <td>
+                <a class="edit" asp-action="Edit" asp-route-id="@item.Id">Modifier</a> |
+                <a class="detail" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a class="delete" asp-action="Delete" asp-route-id="@item.Id">Supprimer</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

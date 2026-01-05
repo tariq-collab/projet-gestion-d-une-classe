@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Appli_gestion_cla.Models.Affectation>
+
+@{
+    ViewData["Title"] = "Affcetation";
+}
+
+<h1 class="size2">Liste des affectations</h1>
+
+<p>
+    <a class="size" asp-action="Create">Nouvelle Affectation</a>
+</p>
+<table class="table">
+    <thead>
+        <tr class="size">
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Enseignant)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Matiere)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Classe)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr class="size">
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Enseignant.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Matiere.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Classe.Nom_sale)
+            </td>
+            <td>
+                <a class="edit" asp-action="Edit" asp-route-id="@item.Id">Modifier</a> |
+                <a class="detail" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a class="delete" asp-action="Delete" asp-route-id="@item.Id">Supprimer</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

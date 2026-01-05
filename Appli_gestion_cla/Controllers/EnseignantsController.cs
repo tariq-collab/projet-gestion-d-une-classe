@@ -22,6 +22,7 @@ namespace Appli_gestion_cla.Controllers
         // GET: Enseignants
         public async Task<IActionResult> Index()
         {
+            var enseignants = _context.Enseignants.Include(e => e.Affectations).ThenInclude(a => a.Matiere);
             return View(await _context.Enseignants.ToListAsync());
         }
 
@@ -46,6 +47,7 @@ namespace Appli_gestion_cla.Controllers
         // GET: Enseignants/Create
         public IActionResult Create()
         {
+            ViewBag.MatiereId = new SelectList(_context.Matieres, "Id", "Nom");
             return View();
         }
 
@@ -54,7 +56,7 @@ namespace Appli_gestion_cla.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nom,Prenom,Matiere")] Enseignant enseignant)
+        public async Task<IActionResult> Create([Bind("Id,Nom,Prenom,Email,MatiereId")] Enseignant enseignant)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +88,7 @@ namespace Appli_gestion_cla.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nom,Prenom,Matiere")] Enseignant enseignant)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nom,Prenom,Email,MatiereId")] Enseignant enseignant)
         {
             if (id != enseignant.Id)
             {

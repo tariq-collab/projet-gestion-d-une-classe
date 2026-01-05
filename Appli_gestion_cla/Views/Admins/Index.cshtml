@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Appli_gestion_cla.Models.Admin>
+
+
+@{
+    ViewData["Title"] = "Accueil Admin";
+}
+
+<div class="home-container">
+    <div class="home-card">
+        <h1 class="text-center">Tableau de bord Administrateur</h1>
+        <p class="text-center">
+            Bienvenue dans l’espace d’administration.
+            Gérez l’ensemble du système depuis ce tableau de bord.
+        </p>
+
+        <div class="row mt-4 text-center">
+
+            <div class="col-md-6 mb-3">
+                <div class="admin-card">
+                    <h5>📚 Gestion des Classes</h5>
+                    <p>Créer, modifier et organiser les classes.</p>
+                    <a class="btn btn-primary w-100" href="/Classes">
+                        Accéder
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <div class="admin-card">
+                    <h5>👩‍🏫 Gestion des Enseignants</h5>
+                    <p>Ajouter et gérer les enseignants.</p>
+                    <a class="btn btn-primary w-100" href="/Enseignants">
+                        Accéder
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <div class="admin-card">
+                    <h5>🎓 Gestion des Élèves</h5>
+                    <p>Inscription et suivi des élèves.</p>
+                    <a class="btn btn-primary w-100" href="/Etudiants">
+                        Accéder
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <div class="admin-card">
+                    <h5>📘 Gestion des Matières</h5>
+                    <p>Configurer les matières et niveaux.</p>
+                    <a class="btn btn-primary w-100" href="/Matieres">
+                        Accéder
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

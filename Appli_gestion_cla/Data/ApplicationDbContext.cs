@@ -13,10 +13,10 @@ namespace Appli_gestion_cla.Data
         {
         }
 
-        public DbSet<Classe> Classe { get; set; }
-        public DbSet<Etudiants> Etudiants { get; set; }
+        public DbSet<Classe> Classes { get; set; }
+        public DbSet<Etudiant> Etudiants { get; set; }
         public DbSet<Enseignant> Enseignants { get; set; }
-        public DbSet<Matiere> Matiere { get; set; }
+        public DbSet<Matiere> Matieres { get; set; }
         public DbSet<Affectation> Affectations { get; set; }
         public DbSet<Note> Notes { get; set; }
 
@@ -41,6 +41,16 @@ namespace Appli_gestion_cla.Data
                 .WithMany(a => a.Notes)
                 .HasForeignKey(n => n.AffectationId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Enseignant>()
+                .HasOne(e => e.Matiere)
+                .WithMany(m => m.Enseignants)
+                .HasForeignKey(n => n.MatiereId)
+                .OnDelete(DeleteBehavior.SetNull);
         }
+    // Modifiez la ligne suivante pour inclure IdentityRole
+public DbSet<Appli_gestion_cla.Models.Admin> Admin { get; set; } = default!;
+    // Modifiez la ligne suivante pour inclure IdentityRole
+public DbSet<Appli_gestion_cla.Models.Prof> Prof { get; set; } = default!;
     }
 }

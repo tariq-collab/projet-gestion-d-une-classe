@@ -7,11 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Appli_gestion_cla.Data;
 using Appli_gestion_cla.Models;
-using Microsoft.AspNetCore.Authorization;
+
+
 
 namespace Appli_gestion_cla.Controllers
 {
-    
+
     public class ClassesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -24,7 +25,7 @@ namespace Appli_gestion_cla.Controllers
         // GET: Classes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Classe.ToListAsync());
+            return View(await _context.Classes.ToListAsync());
         }
 
         // GET: Classes/Details/5
@@ -35,7 +36,7 @@ namespace Appli_gestion_cla.Controllers
                 return NotFound();
             }
 
-            var classe = await _context.Classe
+            var classe = await _context.Classes
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (classe == null)
             {
@@ -75,7 +76,7 @@ namespace Appli_gestion_cla.Controllers
                 return NotFound();
             }
 
-            var classe = await _context.Classe.FindAsync(id);
+            var classe = await _context.Classes.FindAsync(id);
             if (classe == null)
             {
                 return NotFound();
@@ -126,7 +127,7 @@ namespace Appli_gestion_cla.Controllers
                 return NotFound();
             }
 
-            var classe = await _context.Classe
+            var classe = await _context.Classes
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (classe == null)
             {
@@ -141,10 +142,10 @@ namespace Appli_gestion_cla.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var classe = await _context.Classe.FindAsync(id);
+            var classe = await _context.Classes.FindAsync(id);
             if (classe != null)
             {
-                _context.Classe.Remove(classe);
+                _context.Classes.Remove(classe);
             }
 
             await _context.SaveChangesAsync();
@@ -153,7 +154,7 @@ namespace Appli_gestion_cla.Controllers
 
         private bool ClasseExists(int id)
         {
-            return _context.Classe.Any(e => e.Id == id);
+            return _context.Classes.Any(e => e.Id == id);
         }
     }
 }

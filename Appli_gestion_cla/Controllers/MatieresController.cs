@@ -24,7 +24,7 @@ namespace Appli_gestion_cla.Controllers
         // GET: Matieres
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Matiere.ToListAsync());
+            return View(await _context.Matieres.ToListAsync());
         }
 
         // GET: Matieres/Details/5
@@ -35,7 +35,7 @@ namespace Appli_gestion_cla.Controllers
                 return NotFound();
             }
 
-            var matiere = await _context.Matiere
+            var matiere = await _context.Matieres
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (matiere == null)
             {
@@ -56,7 +56,7 @@ namespace Appli_gestion_cla.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nom")] Matiere matiere)
+        public async Task<IActionResult> Create([Bind("Id,Nom,Nbr_heure")] Matiere matiere)
         {
             if (ModelState.IsValid)
             {
@@ -75,7 +75,7 @@ namespace Appli_gestion_cla.Controllers
                 return NotFound();
             }
 
-            var matiere = await _context.Matiere.FindAsync(id);
+            var matiere = await _context.Matieres.FindAsync(id);
             if (matiere == null)
             {
                 return NotFound();
@@ -88,7 +88,7 @@ namespace Appli_gestion_cla.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nom")] Matiere matiere)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nom,Nbr_heure")] Matiere matiere)
         {
             if (id != matiere.Id)
             {
@@ -126,7 +126,7 @@ namespace Appli_gestion_cla.Controllers
                 return NotFound();
             }
 
-            var matiere = await _context.Matiere
+            var matiere = await _context.Matieres
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (matiere == null)
             {
@@ -141,10 +141,10 @@ namespace Appli_gestion_cla.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var matiere = await _context.Matiere.FindAsync(id);
+            var matiere = await _context.Matieres.FindAsync(id);
             if (matiere != null)
             {
-                _context.Matiere.Remove(matiere);
+                _context.Matieres.Remove(matiere);
             }
 
             await _context.SaveChangesAsync();
@@ -153,7 +153,7 @@ namespace Appli_gestion_cla.Controllers
 
         private bool MatiereExists(int id)
         {
-            return _context.Matiere.Any(e => e.Id == id);
+            return _context.Matieres.Any(e => e.Id == id);
         }
     }
 }

@@ -1,0 +1,41 @@
+﻿@model Appli_gestion_cla.Models.Classe
+
+@{
+    ViewData["Title"] = "Modifier";
+}
+
+<h1>Modifier</h1>
+
+<h4>Classe</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Nom_sale" class="control-label"></label>
+                <input asp-for="Nom_sale" class="form-control" />
+                <span asp-validation-for="Nom_sale" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Capacite_Max" class="control-label"></label>
+                <input asp-for="Capacite_Max" class="form-control" />
+                <span asp-validation-for="Capacite_Max" class="text-danger"></span>
+            </div>
+            <br/>
+            <div class="form-group">
+                <button type="submit" value="Save" class="btn btn-primary">Enregistrer</button>
+            </div>
+            <br/>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Retour à la liste</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

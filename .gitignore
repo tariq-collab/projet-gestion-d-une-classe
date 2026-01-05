@@ -361,3 +361,26 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+
+
+## Visual Studio ##
+.vs/
+*.user
+*.suo
+
+## Build ##
+bin/
+obj/
+
+## EF Core ##
+*.db
+*.mdf
+*.ldf
+
+## Secrets ##
+appsettings.Development.json
+
+## OS ##
+.DS_Store
+Thumbs.db
