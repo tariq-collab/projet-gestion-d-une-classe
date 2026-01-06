@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Appli_gestion_cla.Data;
 using Appli_gestion_cla.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Appli_gestion_cla.Controllers
 {
@@ -51,7 +52,11 @@ namespace Appli_gestion_cla.Controllers
             ViewData["ClasseId"] = new SelectList(_context.Classes, "Id", "Id");
             return View();
         }
-
+        
+        public IActionResult EmploiDuTemps()
+        {
+            return View();
+        }
         // POST: Etudiants1/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.

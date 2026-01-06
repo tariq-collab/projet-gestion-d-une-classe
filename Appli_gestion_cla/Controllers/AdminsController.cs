@@ -115,6 +115,36 @@ namespace Appli_gestion_cla.Controllers
             }
             return View(admin);
         }
+        public IActionResult EmploiDuTemps()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> UploadEmploi(IFormFile pdfFile)
+        {
+
+            var folderPath = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                "wwwroot/emplois"
+            );
+
+            if (!Directory.Exists(folderPath))
+                Directory.CreateDirectory(folderPath);
+
+            var filePath = Path.Combine(folderPath, "emploi.pdf");
+
+            //  Supprimer l'ancien
+            if (System.IO.File.Exists(filePath))
+                System.IO.File.Delete(filePath);
+
+            //  Sauvegarder le nouveau
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await pdfFile.CopyToAsync(stream);
+            }
+
+            return RedirectToAction("EmploiDuTemps", "Etudiants1");
+        }
 
         // GET: Admins/Delete/5
         public async Task<IActionResult> Delete(int? id)

@@ -6,7 +6,7 @@
 
 <h1 class="size2">Notes_Etudiants</h1>
 
-@if (User.IsInRole("Admin") && User.IsInRole("Prof"))
+@if (User.IsInRole("Admin") || User.IsInRole("Prof"))
 {
     <p>
         <a class="size" asp-action="Create">Ajout_Note</a>
