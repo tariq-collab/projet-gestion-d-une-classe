@@ -41,6 +41,14 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Affectations" asp-action="Index">Classe_affectée</a>
                         }
 
+                        @if (User.IsInRole("Eleve"))
+                        {
+                            <a class="navbar-brand" asp-area="" asp-controller="Etudiants1" asp-action="Index">Etudiants</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Matieres" asp-action="Index">Liste_des_matieres</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Notes" asp-action="Index">Notes</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Absences" asp-action="Index">Heure d'absence</a>
+                        }
+
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

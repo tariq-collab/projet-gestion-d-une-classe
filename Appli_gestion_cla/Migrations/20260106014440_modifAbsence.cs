@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Appli_gestion_cla.Migrations
 {
     /// <inheritdoc />
-    public partial class initCreateRelation : Migration
+    public partial class modifAbsence : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -68,12 +68,24 @@ namespace Appli_gestion_cla.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nom_sale = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Nom_sale = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Capacite_Max = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Classes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Prof",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Prof", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -205,6 +217,31 @@ namespace Appli_gestion_cla.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Absences",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Heure_Absence = table.Column<int>(type: "int", nullable: true),
+                    EtudiantId = table.Column<int>(type: "int", nullable: false),
+                    ClasseId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Absences", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Absences_Classes_ClasseId",
+                        column: x => x.ClasseId,
+                        principalTable: "Classes",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Absences_Etudiants_EtudiantId",
+                        column: x => x.EtudiantId,
+                        principalTable: "Etudiants",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Affectations",
                 columns: table => new
                 {
@@ -312,7 +349,8 @@ namespace Appli_gestion_cla.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nom = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Nom = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Nbr_heure = table.Column<int>(type: "int", nullable: false),
                     EnseignantId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -324,6 +362,16 @@ namespace Appli_gestion_cla.Migrations
                         principalTable: "Enseignants",
                         principalColumn: "Id");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Absences_ClasseId",
+                table: "Absences",
+                column: "ClasseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Absences_EtudiantId",
+                table: "Absences",
+                column: "EtudiantId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Affectations_ClasseId",
@@ -464,6 +512,9 @@ namespace Appli_gestion_cla.Migrations
                 table: "Matieres");
 
             migrationBuilder.DropTable(
+                name: "Absences");
+
+            migrationBuilder.DropTable(
                 name: "Admin");
 
             migrationBuilder.DropTable(
@@ -489,6 +540,9 @@ namespace Appli_gestion_cla.Migrations
 
             migrationBuilder.DropTable(
                 name: "Notes");
+
+            migrationBuilder.DropTable(
+                name: "Prof");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -6,9 +6,13 @@
 
 <h1 class="size2">Notes_Etudiants</h1>
 
-<p>
-    <a class="size" asp-action="Create">Ajout_Note</a>
-</p>
+@if (User.IsInRole("Admin") && User.IsInRole("Prof"))
+{
+    <p>
+        <a class="size" asp-action="Create">Ajout_Note</a>
+    </p>
+}
+
 <table class="table">
     <thead>
         <tr class="size">
@@ -48,11 +52,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Affectation.Id)
             </td>
-            <td>
-                <a class="edit" asp-action="Edit" asp-route-id="@item.Id">Modifier</a> |
-                <a class="detail" asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a class="delete" asp-action="Delete" asp-route-id="@item.Id">Supprimer</a>
-            </td>
+
+            @if (User.IsInRole("Admin") && User.IsInRole("Prof"))
+            {
+              <td>
+                  <a class="edit" asp-action="Edit" asp-route-id="@item.Id">Modifier</a> |
+                  <a class="detail" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                  <a class="delete" asp-action="Delete" asp-route-id="@item.Id">Supprimer</a>
+              </td>
+            }
+           
         </tr>
 }
     </tbody>

@@ -151,6 +151,26 @@ using (var scope = app.Services.CreateScope())
             }
         };
 
+        var etudiants = new[]
+        {
+            new {
+                Email = "jean.sophie@ecole.com",
+                Password = "Jean@123",
+                Prenom = "Sophie",
+                Nom = "jean",
+               
+            },
+            new {
+                Email = "Alivine.pierre@ecole.com",
+                Password = "Alivine@123",
+                Prenom = "Pierre",
+                Nom = "Alvine",
+               
+            }
+           
+        };
+
+
         Console.WriteLine("\n=== CRÉATION DES ENSEIGNANTS ===");
 
         foreach (var prof in enseignants)
@@ -194,6 +214,49 @@ using (var scope = app.Services.CreateScope())
             else
             {
                 Console.WriteLine($"ℹ️ Enseignant existe déjà: {prof.Email}");
+            }
+        }
+
+        foreach (var Eleve in etudiants)
+        {
+            var EleveUser = await userManager.FindByEmailAsync(Eleve.Email);
+
+            if (EleveUser == null)
+            {
+                EleveUser = new IdentityUser
+                {
+                    UserName = Eleve.Email,
+                    Email = Eleve.Email,
+                    EmailConfirmed = true
+                };
+
+                var createProfResult = await userManager.CreateAsync(EleveUser, Eleve.Password);
+
+                if (createProfResult.Succeeded)
+                {
+                    // Ajout du rôle Prof
+                    await userManager.AddToRoleAsync(EleveUser, "Eleve");
+
+                    // Ajout des claims pour stocker des informations supplémentaires
+                    await userManager.AddClaimAsync(EleveUser, new System.Security.Claims.Claim("Prenom", Eleve.Prenom));
+                    await userManager.AddClaimAsync(EleveUser, new System.Security.Claims.Claim("Nom", Eleve.Nom));
+                    await userManager.AddClaimAsync(EleveUser, new System.Security.Claims.Claim("FullName", $"{Eleve.Prenom} {Eleve.Nom}"));
+
+                    Console.WriteLine($"✅ Enseignant créé: {Eleve.Prenom} {Eleve.Nom}");
+                    
+                }
+                else
+                {
+                    Console.WriteLine($"❌ Erreur pour {Eleve.Email}:");
+                    foreach (var error in createProfResult.Errors)
+                    {
+                        Console.WriteLine($"  - {error.Description}");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine($"ℹ️ Enseignant existe déjà: {Eleve.Email}");
             }
         }
 

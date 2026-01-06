@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Appli_gestion_cla.Models.Absence>
+
+@{
+    ViewData["Title"] = "Absence_Etudiant";
+}
+
+<h1>Absence</h1>
+@if(User.IsInRole("Admin") && User.IsInRole("Prof"))
+{
+    <p>
+        <a asp-action="Create">Ajout</a>
+    </p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Heure_Absence)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Etudiant)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Classe)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Heure_Absence)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Etudiant.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Classe.Nom_sale)
+            </td>
+                @if (User.IsInRole("Admin") && User.IsInRole("Prof"))
+                {
+                    <td>
+                        <a classe="edit" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a classe="detail" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a classe="delete" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                }
+        </tr>
+}
+    </tbody>
+</table>

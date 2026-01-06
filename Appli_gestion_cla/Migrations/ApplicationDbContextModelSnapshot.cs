@@ -22,6 +22,32 @@ namespace Appli_gestion_cla.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Appli_gestion_cla.Models.Absence", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ClasseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EtudiantId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Heure_Absence")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClasseId");
+
+                    b.HasIndex("EtudiantId");
+
+                    b.ToTable("Absences");
+                });
+
             modelBuilder.Entity("Appli_gestion_cla.Models.Admin", b =>
                 {
                     b.Property<int>("Id")
@@ -440,6 +466,23 @@ namespace Appli_gestion_cla.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Appli_gestion_cla.Models.Absence", b =>
+                {
+                    b.HasOne("Appli_gestion_cla.Models.Classe", "Classe")
+                        .WithMany("Absences")
+                        .HasForeignKey("ClasseId")
+                        .IsRequired();
+
+                    b.HasOne("Appli_gestion_cla.Models.Etudiant", "Etudiant")
+                        .WithMany("Absences")
+                        .HasForeignKey("EtudiantId")
+                        .IsRequired();
+
+                    b.Navigation("Classe");
+
+                    b.Navigation("Etudiant");
+                });
+
             modelBuilder.Entity("Appli_gestion_cla.Models.Affectation", b =>
                 {
                     b.HasOne("Appli_gestion_cla.Models.Classe", "Classe")
@@ -602,6 +645,8 @@ namespace Appli_gestion_cla.Migrations
 
             modelBuilder.Entity("Appli_gestion_cla.Models.Classe", b =>
                 {
+                    b.Navigation("Absences");
+
                     b.Navigation("Affectations");
 
                     b.Navigation("Etudiants");
@@ -616,6 +661,8 @@ namespace Appli_gestion_cla.Migrations
 
             modelBuilder.Entity("Appli_gestion_cla.Models.Etudiant", b =>
                 {
+                    b.Navigation("Absences");
+
                     b.Navigation("Notes");
                 });
 

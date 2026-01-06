@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Appli_gestion_cla.Models.Etudiant>
+
+@{
+    ViewData["Title"] = "Accueil Étudiant";
+}
+<link rel="stylesheet" href="~/css/etudiant.css" />
+
+<div class="dashboard">
+
+    <!-- EN-TÊTE -->
+    <header class="dashboard-header">
+        <h1>Bienvenue 👋</h1>
+        <p>Espace étudiant</p>
+    </header>
+
+    <!-- INFOS -->
+    <section class="cards">
+
+        <div class="card">
+            <h3>📚 Ma classe</h3>
+            <p>Classe : <strong>3ème A</strong></p>
+        </div>
+
+        <div class="card">
+            <h3>📖 Matières</h3>
+            <ul>
+                <li>Mathématiques</li>
+                <li>Français</li>
+                <li>Physique</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>📝 Notes</h3>
+            <p>Consulter mes notes</p>
+            <a class="btn" href="#">Voir</a>
+        </div>
+
+    </section>
+
+    <!-- DÉCONNEXION -->
+    <div class="logout">
+        <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button type="submit">Déconnexion</button>
+        </form>
+    </div>
+
+</div>
+
+

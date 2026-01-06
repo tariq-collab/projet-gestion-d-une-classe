@@ -134,6 +134,13 @@ namespace Appli_gestion_cla.Areas.Identity.Pages.Account
                         {
                             return RedirectToAction("Index", "Profs");
                         }
+                        
+                        
+                        if (await _userManager.IsInRoleAsync(user, "Eleve"))
+                        {
+                            return RedirectToAction("Index", "Etudiants1");
+                        }
+                        
                     }
                         return RedirectToAction("Index", "Home");
                 }

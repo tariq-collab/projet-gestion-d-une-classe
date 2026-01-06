@@ -19,6 +19,7 @@ namespace Appli_gestion_cla.Data
         public DbSet<Matiere> Matieres { get; set; }
         public DbSet<Affectation> Affectations { get; set; }
         public DbSet<Note> Notes { get; set; }
+        public DbSet<Absence> Absences { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -47,10 +48,27 @@ namespace Appli_gestion_cla.Data
                 .WithMany(m => m.Enseignants)
                 .HasForeignKey(n => n.MatiereId)
                 .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Absence>(entity =>
+            {
+                // Relation avec Etudiant
+                entity.HasOne(a => a.Etudiant)
+                      .WithMany(e => e.Absences) // ← CORRIGEZ ICI : ajoutez la navigation
+                      .HasForeignKey(a => a.EtudiantId)
+                      .OnDelete(DeleteBehavior.ClientSetNull); // Modifié de Restrict
+
+                // Relation avec Classe (manquante dans votre config)
+                entity.HasOne(a => a.Classe)
+                      .WithMany(c => c.Absences) // ← Navigation inverse dans Classe
+                      .HasForeignKey(a => a.ClasseId)
+                      .OnDelete(DeleteBehavior.ClientSetNull);
+            });
         }
     // Modifiez la ligne suivante pour inclure IdentityRole
 public DbSet<Appli_gestion_cla.Models.Admin> Admin { get; set; } = default!;
     // Modifiez la ligne suivante pour inclure IdentityRole
 public DbSet<Appli_gestion_cla.Models.Prof> Prof { get; set; } = default!;
+    // Modifiez la ligne suivante pour inclure IdentityRole
+
     }
 }

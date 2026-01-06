@@ -12,5 +12,6 @@
 
 
         public ICollection<Note> Notes { get; set; } = new List<Note>();
+        public ICollection<Absence>? Absences { get; set; }
     }
 }
