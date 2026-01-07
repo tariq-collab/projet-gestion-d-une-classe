@@ -26,11 +26,13 @@
                             <a class="navbar-brand" asp-area="" asp-controller="Admins" asp-action="Index">Administrateur</a>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Etudiants" asp-action="Index"> Etudiants</a>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Enseignants" asp-action="Index"> Enseignants</a>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Matieres" asp-action="Index"> Matieres</a>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Notes" asp-action="Index"> Notes</a>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Classes" asp-action="Index"> Classe</a>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Affectations" asp-action="Index">Affectation</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Matieres" asp-action="Index"> Matieres</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Notes" asp-action="Index"> Notes</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Absences" asp-action="Index">Heures d'absence des étudiants</a>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Admins" asp-action="EmploiDuTemps">Emploi_Du_Temps</a>
+                            
                         }
 
                         @if (User.IsInRole("Prof"))
@@ -40,7 +42,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Matieres" asp-action="Index">Liste_des_matieres</a>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Notes" asp-action="Index">Modification_des_notes</a>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Affectations" asp-action="Index">Classe_affectée</a>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Admins" asp-action="EmploiDuTemps">Emploi_Du_Temps</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Admins" asp-action="EmploiDuTemps">Emploi Du Temps</a>
                         }
 
                         @if (User.IsInRole("Eleve"))
@@ -48,8 +50,8 @@
                             <a class="navbar-brand" asp-area="" asp-controller="Etudiants1" asp-action="Index">Etudiants</a>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Matieres" asp-action="Index">Liste_des_matieres</a>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Notes" asp-action="Index">Notes</a>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Absences" asp-action="Index">Heure d'absence</a>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Admins" asp-action="EmploiDuTemps">Emploi_Du_Temps</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Absences" asp-action="Index">Heures d'absence des étudiants</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Admins" asp-action="EmploiDuTemps">Emploi Du Temps</a>
                         }
 
                     </ul>

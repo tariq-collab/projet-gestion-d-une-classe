@@ -32,7 +32,7 @@ namespace Appli_gestion_cla.Controllers
         // GET: Etudiants/Create
         public IActionResult Create()
         {
-            ViewBag.ClasseId = new SelectList(_context.Classes, "Id", "Nom_sale");
+            ViewBag.Classes = new SelectList(_context.Classes, "Id", "Nom_salle");
             return View();
         }
 
@@ -48,7 +48,7 @@ namespace Appli_gestion_cla.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewBag.ClasseId = new SelectList(_context.Classes, "Id", "Nom_sale", etudiant.ClasseId);
+            ViewBag.Classes = new SelectList(_context.Classes, "Id", "Nom_salle", etudiant.ClasseId);
             return View(etudiant);
         }
 
@@ -60,7 +60,7 @@ namespace Appli_gestion_cla.Controllers
             var etudiant = await _context.Etudiants.FindAsync(id);
             if (etudiant == null) return NotFound();
 
-            ViewBag.ClasseId = new SelectList(_context.Classes, "Id", "Nom_sale", etudiant.ClasseId);
+            ViewBag.Classes = new SelectList(_context.Classes, "Id", "Nom_salle", etudiant.ClasseId);
             return View(etudiant);
         }
 
@@ -78,7 +78,7 @@ namespace Appli_gestion_cla.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewBag.ClasseId = new SelectList(_context.Classes, "Id", "Nom_sale", etudiant.ClasseId);
+            ViewBag.Classe = new SelectList(_context.Classes, "Id", "Nom_salle", etudiant.ClasseId);
             return View(etudiant);
         }
 

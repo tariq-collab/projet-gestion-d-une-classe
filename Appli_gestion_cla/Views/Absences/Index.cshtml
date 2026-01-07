@@ -5,7 +5,7 @@
 }
 
 <h1>Absence</h1>
-@if(User.IsInRole("Admin") && User.IsInRole("Prof"))
+@if(User.IsInRole("Admin") || User.IsInRole("Prof"))
 {
     <p>
         <a asp-action="Create">Ajout</a>
@@ -34,17 +34,15 @@
                 @Html.DisplayFor(modelItem => item.Heure_Absence)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Etudiant.Nom)
+                @Html.DisplayFor(modelItem => item.EtudiantId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Classe.Nom_salle)
+                @Html.DisplayFor(modelItem => item.ClasseId)
             </td>
-                @if (User.IsInRole("Admin") && User.IsInRole("Prof"))
+                @if (User.IsInRole("Admin") || User.IsInRole("Prof"))
                 {
                     <td>
-                        <a classe="edit" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a classe="detail" asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a classe="delete" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        <a classe="delete" asp-action="Delete" asp-route-id="@item.Id">Supprimer</a>
                     </td>
                 }
         </tr>

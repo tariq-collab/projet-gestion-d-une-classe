@@ -1,10 +1,10 @@
 ﻿@model Appli_gestion_cla.Models.Absence
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Créer";
 }
 
-<h1>Create</h1>
+<h1>Créer</h1>
 
 <h4>Absence</h4>
 <hr />
@@ -17,15 +17,28 @@
                 <input asp-for="Heure_Absence" class="form-control" />
                 <span asp-validation-for="Heure_Absence" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+
+                <label asp-for="EtudiantId" class="control-label"></label>
+                <select asp-for="EtudiantId" class="form-control" asp-items="ViewBag.Etudiants"><option value="">--Selectionner une classe--</option></select>
+                <span asp-validation-for="EtudiantId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <label asp-for="ClasseId" class="control-label"></label>
+                <select asp-for="ClasseId" class="form-control" asp-items="ViewBag.Classes"><option value="">--Selectionner une classe--</option></select>
+                <span asp-validation-for="ClasseId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Créer" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Retour</a>
 </div>
 
 @section Scripts {
