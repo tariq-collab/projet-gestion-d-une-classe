@@ -88,7 +88,7 @@ namespace Appli_gestion_cla.Controllers
             {
                 return NotFound();
             }
-            ViewData["ClasseId"] = new SelectList(_context.Classes, "Id", "nom_sale", affectation.ClasseId);
+            ViewData["ClasseId"] = new SelectList(_context.Classes, "Id", "nom_salle", affectation.ClasseId);
             ViewData["EnseignantId"] = new SelectList(_context.Enseignants, "Id", "Nom", affectation.EnseignantId);
             ViewData["MatiereId"] = new SelectList(_context.Matieres, "Id", "Nom", affectation.MatiereId);
             return View(affectation);
@@ -126,7 +126,7 @@ namespace Appli_gestion_cla.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClasseId"] = new SelectList(_context.Classes, "Id", "Nom_sale", affectation.ClasseId);
+            ViewData["ClasseId"] = new SelectList(_context.Classes, "Id", "Nom_salle", affectation.ClasseId);
             ViewData["EnseignantId"] = new SelectList(_context.Enseignants, "Id", "Nom", affectation.EnseignantId);
             ViewData["MatiereId"] = new SelectList(_context.Matieres, "Id", "Nom", affectation.MatiereId);
             return View(affectation);

@@ -14,23 +14,23 @@
             @Html.DisplayNameFor(model => model.Enseignant)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Enseignant.Id)
+            @Html.DisplayFor(model => model.Enseignant.Nom)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Matiere)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Matiere.Id)
+            @Html.DisplayFor(model => model.Matiere.Nom)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Classe)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Classe.Id)
+            @Html.DisplayFor(model => model.Classe.Nom_salle)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Modifier</a> |
+    <a asp-action="Index">Retour</a>
 </div>

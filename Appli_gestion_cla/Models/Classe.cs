@@ -3,7 +3,7 @@
     public class Classe
     {
         public int Id { get; set; }
-        public string? Nom_sale { get; set; }
+        public string? Nom_salle { get; set; }
         public int Capacite_Max { get; set; }
 
         public ICollection<Etudiant> Etudiants { get; set; } = new List<Etudiant>();

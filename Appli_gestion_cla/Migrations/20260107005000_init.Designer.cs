@@ -4,6 +4,7 @@ using Appli_gestion_cla.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Appli_gestion_cla.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260107005000_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,7 +104,7 @@ namespace Appli_gestion_cla.Migrations
                     b.Property<int>("Capacite_Max")
                         .HasColumnType("int");
 
-                    b.Property<string>("Nom_salle")
+                    b.Property<string>("Nom_sale")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -176,11 +179,11 @@ namespace Appli_gestion_cla.Migrations
                     b.Property<int?>("EnseignantId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Nbr_heure")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nom")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Nombre_heures")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

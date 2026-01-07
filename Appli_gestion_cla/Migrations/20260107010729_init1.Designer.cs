@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Appli_gestion_cla.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260106014440_modifAbsence")]
-    partial class modifAbsence
+    [Migration("20260107010729_init1")]
+    partial class init1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -104,7 +104,7 @@ namespace Appli_gestion_cla.Migrations
                     b.Property<int>("Capacite_Max")
                         .HasColumnType("int");
 
-                    b.Property<string>("Nom_sale")
+                    b.Property<string>("Nom_salle")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
